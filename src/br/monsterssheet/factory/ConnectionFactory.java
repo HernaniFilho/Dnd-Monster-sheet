@@ -8,7 +8,7 @@ public class ConnectionFactory {
     private static final String USERNAME = "root";
 
     //Password
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "0123456";
 
     //Database URL, Port, Database name
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/monsterssheet";
@@ -16,7 +16,7 @@ public class ConnectionFactory {
     //Connection with Database
     public static Connection createConnectionToMySQL() throws Exception{
         //Faz a classe ser carregada pela JVM
-        Class.forName("com.mysql.jdbc.Driver");
+        //Class.forName("com.mysql.cj.jdbc.Driver"); não necessário em versões mais recentes
 
         //Conecction with Database
         Connection connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
