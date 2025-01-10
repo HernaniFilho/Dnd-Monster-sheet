@@ -31,7 +31,7 @@ public class MonsterDAO {
             pstm.setInt(4, monster.getArmorClass());
             pstm.setInt(5, monster.getHitPoints());
             pstm.setInt(6, monster.getSpeed());
-            pstm.setInt(7, monster.getChallenge());
+            pstm.setString(7, monster.getChallenge());
             pstm.setInt(8, monster.getStrength());
             pstm.setInt(9, monster.getDexterity());
             pstm.setInt(10, monster.getConstitution());
@@ -61,14 +61,15 @@ public class MonsterDAO {
     }
 
     //READ
-    public Monster findByName(String name) {
-        String select = "SELECT * FROM Monsters WHERE name LIKE ?";
+    public List<Monster> findByName(String name) {
+        String select = "SELECT * FROM Monsters WHERE LOWER(name) LIKE LOWER(?) ORDER BY name ASC";
 
+        name = name + "%";
         Connection conn = null;
         PreparedStatement pstm = null;
         ResultSet rset = null;
-        Monster m = new Monster();
-        //String rname = null;
+        List<Monster> monsters = new ArrayList<Monster>();
+
         try {
             //Conecta no banco de dados
             conn = ConnectionFactory.createConnectionToMySQL();
@@ -77,25 +78,28 @@ public class MonsterDAO {
             pstm.setString(1, name);
 
             rset = pstm.executeQuery();
-            rset.next();
+            while (rset.next()) {
+                //Cria e seta valores para uma entrada da tabela
+                Monster m = new Monster();
+                m.setAlignment(rset.getString("alignment"));
+                m.setArmorClass(rset.getInt("armorClass"));
+                m.setChallenge(rset.getString("challenge"));
+                m.setCharisma(rset.getInt("charisma"));
+                m.setConstitution(rset.getInt("constitution"));
+                m.setDexterity(rset.getInt("dexterity"));
+                m.setHitPoints(rset.getInt("hitPoints"));
+                m.setId(rset.getInt("id"));
+                m.setIntelligence(rset.getInt("intelligence"));
+                m.setName(rset.getString("name"));
+                m.setProficiencyBonus(rset.getInt("proficiencyBonus"));
+                m.setSpeed(rset.getInt("speed"));
+                m.setStrength(rset.getInt("strength"));
+                m.setType(rset.getString("type"));
+                m.setWisdom(rset.getInt("wisdom"));
+                //adiciona a lista
+                monsters.add(m);
+            }
             
-            m.setAlignment(rset.getString("alignment"));
-            m.setArmorClass(rset.getInt("armorClass"));
-            m.setChallenge(rset.getInt("challenge"));
-            m.setCharisma(rset.getInt("charisma"));
-            m.setConstitution(rset.getInt("constitution"));
-            m.setDexterity(rset.getInt("dexterity"));
-            m.setHitPoints(rset.getInt("hitPoints"));
-            m.setId(rset.getInt("id"));
-            m.setIntelligence(rset.getInt("intelligence"));
-            m.setName(rset.getString("name"));
-            m.setProficiencyBonus(rset.getInt("proficiencyBonus"));
-            m.setSpeed(rset.getInt("speed"));
-            m.setStrength(rset.getInt("strength"));
-            m.setType(rset.getString("type"));
-            m.setWisdom(rset.getInt("wisdom"));
-            
-            //rname = rset.getString("name");
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Nome não encontrado");
@@ -117,13 +121,13 @@ public class MonsterDAO {
                 e.printStackTrace();
             }
         }
-        return m;
+        return monsters;
 
     }
 
     //READ
     public List<Monster> listAll() {
-        String select = "select * FROM Monsters";
+        String select = "select * FROM Monsters ORDER BY name ASC";
 
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -139,10 +143,11 @@ public class MonsterDAO {
             rset = pstm.executeQuery();
 
             while(rset.next()) {
+                //Cria e seta
                 Monster m = new Monster();
                 m.setAlignment(rset.getString("alignment"));
                 m.setArmorClass(rset.getInt("armorClass"));
-                m.setChallenge(rset.getInt("challenge"));
+                m.setChallenge(rset.getString("challenge"));
                 m.setCharisma(rset.getInt("charisma"));
                 m.setConstitution(rset.getInt("constitution"));
                 m.setDexterity(rset.getInt("dexterity"));
@@ -155,7 +160,7 @@ public class MonsterDAO {
                 m.setStrength(rset.getInt("strength"));
                 m.setType(rset.getString("type"));
                 m.setWisdom(rset.getInt("wisdom"));
-
+                //Adiciona a lista
                 monsters.add(m);
             }
         } catch (Exception e) {
@@ -181,4 +186,5 @@ public class MonsterDAO {
         }
         return monsters;
     }
+
 }

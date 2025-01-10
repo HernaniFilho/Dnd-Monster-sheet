@@ -7,7 +7,7 @@ public class Monster {
     private int armorClass;
     private int hitPoints;
     private int speed;
-    private int challenge;
+    private String challenge;
 
     private int strength;
     private int dexterity;
@@ -76,11 +76,11 @@ public class Monster {
         this.speed = speed;
     }
 
-    public int getChallenge() {
+    public String getChallenge() {
         return challenge;
     }
 
-    public void setChallenge(int challenge) {
+    public void setChallenge(String challenge) {
         this.challenge = challenge;
     }
 

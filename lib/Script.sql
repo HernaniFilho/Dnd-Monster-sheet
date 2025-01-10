@@ -8,7 +8,7 @@ CREATE TABLE Monsters (
     armorClass INTEGER,
     hitPoints INTEGER NOT NULL,
     speed INTEGER,
-    challenge INTEGER NOT NULL,
+    challenge VARCHAR(10) NOT NULL,
     strength INTEGER NOT NULL,
     dexterity INTEGER NOT NULL,
     constitution INTEGER NOT NULL,
