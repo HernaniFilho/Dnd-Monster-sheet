@@ -62,7 +62,7 @@ public class MonsterDAO {
 
     //READ
     public List<Monster> findByName(String name) {
-        String select = "SELECT * FROM Monsters WHERE LOWER(name) LIKE LOWER(?) ORDER BY name ASC";
+        String select = "SELECT * FROM Monsters WHERE name LIKE ? ORDER BY name ASC";
 
         name = name + "%";
         Connection conn = null;
