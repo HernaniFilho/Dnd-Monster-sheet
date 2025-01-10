@@ -1,5 +1,8 @@
 package br.monsterssheet.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.monsterssheet.model.entity.Monster;
 import br.monsterssheet.model.service.MonsterService;
 
@@ -33,8 +36,15 @@ public class MonsterController implements IController{
 
         //Checa as regras de negócio e salva no banco de dados
         MonsterService service = new MonsterService();
-        service.checkRules(m);
-        System.out.println("Teste concluído! Verificar MySQL!");
+        //service.checkRules(m);
+        //Checa se nome já existe
+        Monster m2 = service.findByName("Rato");
+        System.out.println("Teste concluído! Verificar MySQL! Nome: "+m2.getName()+" ArmorClass: "+m2.getArmorClass());
+        List<Monster> monsters = new ArrayList<Monster>();
+        monsters = service.listAll();
+        for (Monster mon : monsters) {
+            System.out.println(mon);
+        }
     }
 
 }

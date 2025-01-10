@@ -1,5 +1,7 @@
 package br.monsterssheet.model.service;
 
+import java.util.List;
+
 import br.monsterssheet.model.dao.MonsterDAO;
 import br.monsterssheet.model.entity.Monster;
 
@@ -15,6 +17,12 @@ public class MonsterService {
     public void checkRules(Monster monster) {
         if(monster.getName() == null || monster.getName().length() < 3) {
             System.out.println("Nome não pode ter menos de 3 caracteres ou ser nulo");
+            return;
+        }
+        Monster m = new Monster();
+        m = findByName(monster.getName());
+        if(monster.getName() == m.getName()) {
+            System.out.println("Nome para monstro já está sendo utilizado");
             return;
         }
         if(monster.getType() == null) {
@@ -62,4 +70,17 @@ public class MonsterService {
         dao.save(monster);
     }
 
+    /*
+     * Procura por nome no banco de dados
+     */
+    public Monster findByName(String name) {
+        return dao.findByName(name);
+    }
+
+    /*
+     * Lista todos os monstros
+     */
+    public List<Monster> listAll() {
+        return dao.listAll();
+    }
 }

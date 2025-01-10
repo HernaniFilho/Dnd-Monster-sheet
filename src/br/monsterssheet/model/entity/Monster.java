@@ -18,8 +18,16 @@ public class Monster {
 
     private int proficiencyBonus;
 
-
+    private int id;
     
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -132,7 +140,13 @@ public class Monster {
         this.proficiencyBonus = proficiencyBonus;
     }
 
-
+    public String toString() {
+        return "Id: "+getId()+" Name: "+getName()+" Type: "+getType()+" Alignment: "+getAlignment()+
+        " ArmorClass: "+getArmorClass()+" HitPoints: "+getHitPoints()+" Speed: "+getSpeed()+
+        " Challenge: "+getChallenge()+" Strength: "+getStrength()+" Dexterity: "+getDexterity()+
+        " Constitution: "+getConstitution()+" Intelligence: "+getIntelligence()+" Wisdom: "+getWisdom()+
+        " Charisma: "+getCharisma()+" ProficiencyBonus: "+getProficiencyBonus();
+    }
 
     
 }

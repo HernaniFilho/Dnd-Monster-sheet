@@ -2,6 +2,9 @@ package br.monsterssheet.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.monsterssheet.factory.ConnectionFactory;
 import br.monsterssheet.model.entity.Monster;
@@ -55,5 +58,127 @@ public class MonsterDAO {
                 e.printStackTrace();
             }
         }
+    }
+
+    //READ
+    public Monster findByName(String name) {
+        String select = "SELECT * FROM Monsters WHERE name LIKE ?";
+
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rset = null;
+        Monster m = new Monster();
+        //String rname = null;
+        try {
+            //Conecta no banco de dados
+            conn = ConnectionFactory.createConnectionToMySQL();
+            //Prepara a string
+            pstm = conn.prepareStatement(select);
+            pstm.setString(1, name);
+
+            rset = pstm.executeQuery();
+            rset.next();
+            
+            m.setAlignment(rset.getString("alignment"));
+            m.setArmorClass(rset.getInt("armorClass"));
+            m.setChallenge(rset.getInt("challenge"));
+            m.setCharisma(rset.getInt("charisma"));
+            m.setConstitution(rset.getInt("constitution"));
+            m.setDexterity(rset.getInt("dexterity"));
+            m.setHitPoints(rset.getInt("hitPoints"));
+            m.setId(rset.getInt("id"));
+            m.setIntelligence(rset.getInt("intelligence"));
+            m.setName(rset.getString("name"));
+            m.setProficiencyBonus(rset.getInt("proficiencyBonus"));
+            m.setSpeed(rset.getInt("speed"));
+            m.setStrength(rset.getInt("strength"));
+            m.setType(rset.getString("type"));
+            m.setWisdom(rset.getInt("wisdom"));
+            
+            //rname = rset.getString("name");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Nome não encontrado");
+        } finally {
+            //Fechar conexões
+            try {
+                if(pstm != null) {
+                    pstm.close();
+                }
+
+                if(conn!=null) {
+                    conn.close();
+                }
+
+                if(rset!=null) {
+                    rset.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return m;
+
+    }
+
+    //READ
+    public List<Monster> listAll() {
+        String select = "select * FROM Monsters";
+
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rset = null;
+        List<Monster> monsters = new ArrayList<Monster>();
+
+        try {
+            //Conecta no banco de dados
+            conn = ConnectionFactory.createConnectionToMySQL();
+            //Prepara a string
+            pstm = conn.prepareStatement(select);
+
+            rset = pstm.executeQuery();
+
+            while(rset.next()) {
+                Monster m = new Monster();
+                m.setAlignment(rset.getString("alignment"));
+                m.setArmorClass(rset.getInt("armorClass"));
+                m.setChallenge(rset.getInt("challenge"));
+                m.setCharisma(rset.getInt("charisma"));
+                m.setConstitution(rset.getInt("constitution"));
+                m.setDexterity(rset.getInt("dexterity"));
+                m.setHitPoints(rset.getInt("hitPoints"));
+                m.setId(rset.getInt("id"));
+                m.setIntelligence(rset.getInt("intelligence"));
+                m.setName(rset.getString("name"));
+                m.setProficiencyBonus(rset.getInt("proficiencyBonus"));
+                m.setSpeed(rset.getInt("speed"));
+                m.setStrength(rset.getInt("strength"));
+                m.setType(rset.getString("type"));
+                m.setWisdom(rset.getInt("wisdom"));
+
+                monsters.add(m);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Nenhum monstro encontrado");
+        } finally {
+            //Fechar as conexões
+            try {
+                if(pstm != null) {
+                    pstm.close();
+                }
+
+                if(conn!=null) {
+                    conn.close();
+                }
+
+                if(rset!=null) {
+                    rset.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return monsters;
     }
 }
