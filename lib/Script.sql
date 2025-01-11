@@ -4,7 +4,7 @@ CREATE TABLE Monsters (
     id int NOT NULL AUTO_INCREMENT  PRIMARY KEY,
     name VARCHAR(20) NOT NULL UNIQUE,
     type VARCHAR(20) NOT NULL,
-    alignment VARCHAR(10),
+    alignment VARCHAR(20),
     armorClass INTEGER,
     hitPoints INTEGER NOT NULL,
     speed INTEGER,

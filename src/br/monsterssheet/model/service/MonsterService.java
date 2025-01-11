@@ -31,17 +31,20 @@ public class MonsterService {
         }
         
         List<String> types = typeValues();
-        if(!types.contains(monster.getType())) {
+        String type = monster.getType().toLowerCase();
+        if(!types.contains(type)) {
             System.out.println("Tipo inválido, favor verificar valores possiveis");
             return false;
         }
         List<String> challenges = challengeValues();
-        if (!challenges.contains(monster.getChallenge())) {
+        String challenge = monster.getChallenge().toLowerCase();
+        if (!challenges.contains(challenge)) {
             System.out.println("Valor inválido para CR, favor verificar valores possiveis");
             return false;
         }
         List<String> alignments = alignmentValues();
-        if (!alignments.contains(monster.getAlignment())) {
+        String alignment = monster.getAlignment().toLowerCase();
+        if (!alignments.contains(alignment)) {
             System.out.println("Valor inválido para tendência, favor verificar valores possiveis");
             return false;
         }
@@ -108,10 +111,10 @@ public class MonsterService {
     }
     //Valores possiveis para Type
     public List<String> typeValues() {
-        String[] values = {"Aberration","Beast","Celestial","Construct","Dragon",
-        "True Dragon","Lesser Dragon","Elemental","Fey","Fiend","Demon","Devil",
-        "Yugoloth","Giant","True Giant","Giant-Kin","Humanoid","Human","Elf",
-        "Dwarf","Monstrosity","Ooze","Plant","Undead"};
+        String[] values = {"aberration","beast","celestial","construct","dragon",
+        "true dragon","lesser dragon","elemental","fey","fiend","demon","devil",
+        "yugoloth","giant","true giant","giant-kin","humanoid","human","elf",
+        "dwarf","monstrosity","ooze","plant","undead"};
         List<String> valueList = new ArrayList<String>(Arrays.asList(values));
         return valueList;
     }
@@ -125,7 +128,22 @@ public class MonsterService {
             System.out.println("Falhou na checagem das regras de negócio");
         }
     }
-
+    /*
+     * Atualiza um monstro no banco de dados
+     */
+    public void update(Monster monster) {
+        if (checkRules(monster)) {
+            dao.update(monster);
+        } else {
+            System.out.println("Falhou na checagem das regras de negócio");
+        }
+    }
+    /*
+     * Deleta um monstro pelo id no banco de dados
+     */
+    public void deleteById(int id) {
+        dao.deleteById(id);
+    }
     /*
      * Procura por nome no banco de dados
      */

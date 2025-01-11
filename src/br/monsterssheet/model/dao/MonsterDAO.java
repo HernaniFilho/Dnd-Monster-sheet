@@ -187,4 +187,89 @@ public class MonsterDAO {
         return monsters;
     }
 
+    //UPDATE
+    public void update(Monster monster) {
+        String update = "UPDATE Monsters SET name = ?, type = ?, alignment = ?, armorClass = ?, hitPoints = ?, speed = ?, challenge = ?, strength = ?, dexterity = ?, constitution = ?, intelligence = ?, wisdom = ?, charisma = ?, proficiencyBonus = ? WHERE id = ? ";
+        
+        Connection conn = null;
+        PreparedStatement pstm = null;
+
+        try {
+            //Conceta ao servidor
+            conn = ConnectionFactory.createConnectionToMySQL();
+            //Prepara a query
+            pstm = conn.prepareStatement(update);
+
+            //Adiciona valores a string
+            pstm.setString(1, monster.getName());
+            pstm.setString(2, monster.getType());
+            pstm.setString(3, monster.getAlignment());
+            pstm.setInt(4, monster.getArmorClass());
+            pstm.setInt(5, monster.getHitPoints());
+            pstm.setInt(6, monster.getSpeed());
+            pstm.setString(7, monster.getChallenge());
+            pstm.setInt(8, monster.getStrength());
+            pstm.setInt(9, monster.getDexterity());
+            pstm.setInt(10, monster.getConstitution());
+            pstm.setInt(11, monster.getIntelligence());
+            pstm.setInt(12, monster.getWisdom());
+            pstm.setInt(13, monster.getCharisma());
+            pstm.setInt(14, monster.getProficiencyBonus());
+            //Id do Monstro
+            pstm.setInt(15, monster.getId());
+
+            //Executa a query
+            pstm.execute();
+            System.out.println("Monstro atualizado com sucesso!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(conn!=null) {
+                    conn.close();
+                }
+                
+                if (pstm!=null) {
+                    pstm.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    //DELETE
+    public void deleteById(int id) {
+        String delete = "DELETE FROM Monsters WHERE id = ?";
+
+        Connection conn = null;
+        PreparedStatement pstm = null;
+
+        try {
+            //Concecta com o banco de dados
+            conn = ConnectionFactory.createConnectionToMySQL();
+            //Prepara a query
+            pstm = conn.prepareStatement(delete);
+
+            pstm.setInt(1, id);
+
+            //Executa a query
+            pstm.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(conn!=null) {
+                    conn.close();
+                }
+
+                if(pstm!=null) {
+                    pstm.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
 }
