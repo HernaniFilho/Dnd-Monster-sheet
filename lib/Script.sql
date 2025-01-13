@@ -1,7 +1,7 @@
 CREATE DATABASE monstersheet;
 
 CREATE TABLE Monsters (
-    id int NOT NULL AUTO_INCREMENT  PRIMARY KEY,
+    id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(20) NOT NULL UNIQUE,
     type VARCHAR(20) NOT NULL,
     alignment VARCHAR(20),
@@ -16,4 +16,10 @@ CREATE TABLE Monsters (
     wisdom INTEGER NOT NULL,
     charisma INTEGER NOT NULL,
     proficiencyBonus INTEGER NOT NULL
-)
+);
+
+CREATE TABLE SavingThrows (
+    id int NOT NULL AUTO_INCREMENT,
+    idMonster int NOT NULL,
+    abilityScore VARCHAR(20) NOT NULL
+);

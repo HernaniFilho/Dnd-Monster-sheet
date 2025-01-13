@@ -125,7 +125,7 @@ public class MonsterService {
         if (checkRules(monster)) {
             dao.save(monster);
         } else {
-            System.out.println("Falhou na checagem das regras de negócio");
+            System.out.println("Monster falhou na checagem das regras de negócio");
         }
     }
     /*
@@ -135,7 +135,7 @@ public class MonsterService {
         if (checkRules(monster)) {
             dao.update(monster);
         } else {
-            System.out.println("Falhou na checagem das regras de negócio");
+            System.out.println("Monster falhou na checagem das regras de negócio");
         }
     }
     /*
