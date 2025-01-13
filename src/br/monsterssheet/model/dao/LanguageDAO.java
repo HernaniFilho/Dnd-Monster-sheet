@@ -8,7 +8,6 @@ import java.util.List;
 
 import br.monsterssheet.factory.ConnectionFactory;
 import br.monsterssheet.model.entity.Language;
-import br.monsterssheet.model.entity.SavingThrow;
 
 public class LanguageDAO {
     /* CRD */
