@@ -104,7 +104,7 @@ public class MonsterService {
         String[] values = {"lawfull good","lawfull neutral","lawfull evil",
                             "neutral good","true neutral","neutral evil",
                             "chaotic good","chaotic neutral","chaotic evil",
-                            null};
+                            ""};
         List<String> valueList = new ArrayList<String>(Arrays.asList(values));
         return valueList;
 
@@ -121,11 +121,12 @@ public class MonsterService {
     /*
      * Salva no banco de dados
      */
-    public void save(Monster monster) {
+    public int save(Monster monster) {
         if (checkRules(monster)) {
-            dao.save(monster);
+            return dao.save(monster);
         } else {
             System.out.println("Monster falhou na checagem das regras de negócio");
+            return 0;
         }
     }
     /*

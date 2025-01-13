@@ -19,7 +19,16 @@ CREATE TABLE Monsters (
 );
 
 CREATE TABLE SavingThrows (
-    id int NOT NULL AUTO_INCREMENT,
-    idMonster int NOT NULL,
-    abilityScore VARCHAR(20) NOT NULL
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    idMonster INTEGER NOT NULL,
+    abilityScore VARCHAR(20) NOT NULL,
+    PRIMARY KEY (id, idMonster),
+    FOREIGN KEY (idMonster) REFERENCES Monsters(id)
+);
+
+CREATE TABLE Languages (
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    idMonster INTEGER,
+    name VARCHAR(30) NOT NULL,
+    FOREIGN KEY (idMonster) REFERENCES Monsters(id)
 );

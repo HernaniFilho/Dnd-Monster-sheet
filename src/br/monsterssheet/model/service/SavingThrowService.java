@@ -46,17 +46,6 @@ public class SavingThrowService {
     }
 
     /*
-     * Atualiza no banco de dados
-     */
-    public void update(SavingThrow savingThrow) {
-        if (checkRules(savingThrow)) {
-            dao.update(savingThrow);
-        } else {
-            System.out.println("SavingThrow falhou na checagem das regras de negócio");
-        }
-    }
-
-    /*
      * Procura pelo idMonster
      */
     public List<SavingThrow> findByIdMonster(int idMonster) {
@@ -68,5 +57,16 @@ public class SavingThrowService {
      */
     public void deleteByIdMonster(int idMonster) {
         dao.deleteByIdMonster(idMonster);
+    }
+
+    /*
+     * Deleta apenas um abilityScore do Monster
+     */
+    public void deleteOneByIdMonster(SavingThrow savingThrow) {
+        if(checkRules(savingThrow)) {
+            dao.deleteOneByIdMonster(savingThrow);
+        } else {
+            System.out.println("SavingThrow falhou no teste de regra de negocio");
+        }
     }
 }

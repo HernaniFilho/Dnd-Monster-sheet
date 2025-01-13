@@ -21,7 +21,7 @@ public class MonsterController implements IController{
         Monster m = new Monster();
         /* m.setName("Rato");
         m.setType("Beast");
-        m.setAlignment(null);
+        m.setAlignment("");
         m.setArmorClass(10);
         m.setHitPoints(30);
         m.setSpeed(9);
@@ -36,9 +36,8 @@ public class MonsterController implements IController{
 
         //Checa as regras de negócio e salva no banco de dados
         MonsterService service = new MonsterService();
-        /* if (service.checkRules(m)) {
-            service.save(m);
-        } */
+        /* int idMonster = service.save(m);
+        System.out.println("Id recebido: "+idMonster); */
         
         //Checa se nome já existe
         /* List<Monster> monsters = service.findByName("Rato");
@@ -67,7 +66,7 @@ public class MonsterController implements IController{
         service.update(m); */
 
         //Deleta uma entrada no banco de dados
-        service.deleteById(3);
+        /* service.deleteById(7); */
 
         //Listando todos os monstros
         List<Monster> monsters2 = new ArrayList<Monster>();

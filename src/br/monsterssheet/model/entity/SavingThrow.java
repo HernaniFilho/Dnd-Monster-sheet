@@ -17,4 +17,7 @@ public class SavingThrow {
         this.abilityScore = abilityScore;
     }
 
+    public String toString() {
+        return "idMonster: "+idMonster+" abilityScore: "+abilityScore;
+    }
 }

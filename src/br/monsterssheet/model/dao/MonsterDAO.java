@@ -3,6 +3,7 @@ package br.monsterssheet.model.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,17 +14,18 @@ public class MonsterDAO {
     /* CRUD */
 
     //CREATE
-    public void save(Monster monster) {
+    public int save(Monster monster) {
         String insert = "INSERT INTO Monsters(name, type, alignment, armorClass, hitPoints, speed, challenge, strength, dexterity, constitution, intelligence, wisdom, charisma, proficiencyBonus) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         Connection conn = null;
         PreparedStatement pstm = null;
-
+        ResultSet rset = null;
+        int idMonster = -1;
         try {
             //Conecta no banco de dados
             conn = ConnectionFactory.createConnectionToMySQL();
             //Prepara a string
-            pstm = conn.prepareStatement(insert);
+            pstm = conn.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             //Adiciona valores a string
             pstm.setString(1, monster.getName());
             pstm.setString(2, monster.getType());
@@ -41,6 +43,12 @@ public class MonsterDAO {
             pstm.setInt(14, monster.getProficiencyBonus());
             //Executa a query
             pstm.execute();
+            // Pega o que foi criado
+            rset = pstm.getGeneratedKeys();
+            // Pega somente a coluna do id
+            if (rset.next()) {
+                idMonster = rset.getInt(1);
+            }
             System.out.println("Monstro salvo com sucesso!");
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,10 +62,15 @@ public class MonsterDAO {
                 if(conn!=null) {
                     conn.close();
                 }
+
+                if(rset!=null) {
+                    rset.close();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+        return idMonster;
     }
 
     //READ
