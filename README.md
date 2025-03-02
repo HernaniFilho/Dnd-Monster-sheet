@@ -1,18 +1,9 @@
-## Getting Started
+## Projeto de Monster sheet Simplificada
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Neste projeto aplico meus conhecimentos em Java e orientação a objetos, como também conhecimentos de padrões arquiteturais (MVC),
+padrões de projeto (Singleton) e afins
 
-## Folder Structure
+## O que apliquei
 
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+O padrão arquitetural MVC junto com o padrão DAO para acesso ao banco de dados MySQL. Implementei singletons para classes
+de acesso ao banco de dados, servicos e de controle do MVC
