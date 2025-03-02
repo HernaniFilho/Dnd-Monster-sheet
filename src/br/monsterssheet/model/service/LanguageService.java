@@ -22,6 +22,13 @@ public class LanguageService {
             System.out.println("Nome de lingua inválido");
             return false;
         }
+
+        // cheacar se idMonster é válido
+        if (language.getIdMonster() <= 0) {
+            System.out.println("IdMonster inválido");
+            return false;
+        }
+
         return true;
     }
 

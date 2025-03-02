@@ -23,6 +23,13 @@ public class SavingThrowService {
             System.out.println("Salvaguarda inválida");
             return false;
         }
+
+        // checar se idMonster é válido
+        if(savingThrow.getIdMonster() <= 0) {
+            System.out.println("IdMonster inválido");
+            return false;
+        }
+        
         return true;
     }
 

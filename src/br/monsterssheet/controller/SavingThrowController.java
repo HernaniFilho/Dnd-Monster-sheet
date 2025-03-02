@@ -20,12 +20,14 @@ public class SavingThrowController implements IController{
     public static void main(String[] args) {
         SavingThrow s = new SavingThrow();
         // Setar valores
-        /* s.setIdMonster(7);
-        s.setAbilityScore("dexterity"); */
+        s.setIdMonster(7);
+        /* s.setAbilityScore("strenght"); */
 
         // Salvar
         SavingThrowService service = new SavingThrowService();
-        /* service.save(s); */
+        String abilityScore = service.abilityScoreValues().get(0);
+        s.setAbilityScore(abilityScore);
+        service.save(s);
 
         // Atualizar
         /* service.update(s); */

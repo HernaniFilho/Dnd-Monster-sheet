@@ -32,3 +32,14 @@ CREATE TABLE Languages (
     name VARCHAR(30) NOT NULL,
     FOREIGN KEY (idMonster) REFERENCES Monsters(id)
 );
+
+CREATE TABLE Actions (
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    idMonster INTEGER NOT NULL,
+    name VARCHAR(30) NOT NULL UNIQUE,
+    description VARCHAR(200) NOT NULL,
+    type VARCHAR(20) NOT NULL,
+    actionRange REAL NOT NULL,
+    isLegendary BOOLEAN NOT NULL,
+    FOREIGN KEY (idMonster) REFERENCES Monsters(id)
+);
