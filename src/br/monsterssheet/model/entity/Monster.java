@@ -1,6 +1,9 @@
 package br.monsterssheet.model.entity;
 
+import java.util.List;
+
 public class Monster {
+	private int id;
     private String name;
     private String type;
     private String alignment;
@@ -8,17 +11,17 @@ public class Monster {
     private int hitPoints;
     private int speed;
     private String challenge;
-
     private int strength;
     private int dexterity;
     private int constitution;
     private int intelligence;
     private int wisdom;
     private int charisma;
-
     private int proficiencyBonus;
 
-    private int id;
+    private List<Language> languages;
+    private List<SavingThrow> savingThrows;
+    private List<Action> actions;
     
     public int getId() {
         return id;
@@ -140,6 +143,54 @@ public class Monster {
         this.proficiencyBonus = proficiencyBonus;
     }
 
+    public void addLanguage(Language l) {
+    	languages.add(l);
+    }
+    
+    public void setLanguage(List<Language> l) {
+    	languages = l;
+    }
+    
+    public void removeLanguage(Language l) {
+    	languages.remove(l);
+    }
+    
+    public List<Language> getLanguages() {
+    	return languages;
+    }
+    
+    public void addSavingThrow(SavingThrow s) {
+    	savingThrows.add(s);
+    }
+    
+    public void setSavingThrow(List<SavingThrow> s) {
+    	savingThrows = s;
+    }
+    
+    public void removeSavingThrow(SavingThrow s) {
+    	savingThrows.remove(s);
+    }
+    
+    public List<SavingThrow> getSavingThrow() {
+    	return savingThrows;
+    }
+
+    public void addAction(Action a) {
+    	actions.add(a);
+    }
+    
+    public void setAction(List<Action> a) {
+    	actions = a;
+    }
+    
+    public void removeAction(Action a) {
+    	actions.remove(a);
+    }
+    
+    public List<Action> getActions() {
+    	return actions;
+    }
+    
     public String toString() {
         return "Id: "+getId()+" Name: "+getName()+" Type: "+getType()+" Alignment: "+getAlignment()+
         " ArmorClass: "+getArmorClass()+" HitPoints: "+getHitPoints()+" Speed: "+getSpeed()+

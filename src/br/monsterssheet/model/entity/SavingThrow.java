@@ -1,6 +1,7 @@
 package br.monsterssheet.model.entity;
 
 public class SavingThrow {
+	private int id;
     private int idMonster;
     private String abilityScore;
 
@@ -16,8 +17,14 @@ public class SavingThrow {
     public void setAbilityScore(String abilityScore) {
         this.abilityScore = abilityScore;
     }
-
-    public String toString() {
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public String toString() {
         return "idMonster: "+idMonster+" abilityScore: "+abilityScore;
     }
 }
