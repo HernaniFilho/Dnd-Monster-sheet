@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 import br.monsterssheet.model.MonsterListTable;
 import br.monsterssheet.model.entity.Monster;
+import br.monsterssheet.model.service.MonsterService;
 
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
@@ -56,31 +57,34 @@ public class MonsterListWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public MonsterListWindow() {
+		// Monster Service
+		MonsterService service = new MonsterService();
+		monsters = service.listAll();
 		// Colocar icon
 		ImageIcon icon = new ImageIcon(this.getClass().getResource("/gold_chest.png"));
 		setIconImage(icon.getImage());
 		setTitle("Monster Sheet - Monster List");
 		// Teste da Tabela
-		monsters = new ArrayList<Monster>();
-		Monster m1 = new Monster();
-		Monster m2 = new Monster();
-		
-		m1.setName("Ratonilson");
-		m1.setHitPoints(50);
-		m1.setArmorClass(12);
-		m1.setChallenge("1/2");
-		m1.setType("Beast");
-		m1.setAlignment("True Neutral");
-		
-		m2.setName("Rato Borrachudo");
-		m2.setHitPoints(100);
-		m2.setArmorClass(16);
-		m2.setChallenge("2");
-		m2.setType("Beast");
-		m2.setAlignment("Chaotic Neutral");
-		
-		monsters.add(m1);
-		monsters.add(m2);
+//		monsters = new ArrayList<Monster>();
+//		Monster m1 = new Monster();
+//		Monster m2 = new Monster();
+//		
+//		m1.setName("Ratonilson");
+//		m1.setHitPoints(50);
+//		m1.setArmorClass(12);
+//		m1.setChallenge("1/2");
+//		m1.setType("Beast");
+//		m1.setAlignment("True Neutral");
+//		
+//		m2.setName("Rato Borrachudo");
+//		m2.setHitPoints(100);
+//		m2.setArmorClass(16);
+//		m2.setChallenge("2");
+//		m2.setType("Beast");
+//		m2.setAlignment("Chaotic Neutral");
+//		
+//		monsters.add(m1);
+//		monsters.add(m2);
 		// Fim do teste da tabela
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -127,6 +131,10 @@ public class MonsterListWindow extends JFrame {
 		JButton btnNewButton = new JButton("Add...");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				MonsterCreatorWindow monsterCreatorWindow = new MonsterCreatorWindow();
+				monsterCreatorWindow.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+				monsterCreatorWindow.setLocationRelativeTo(monsterCreatorWindow);
+				monsterCreatorWindow.setVisible(true);
 			}
 		});
 		btnNewButton.setBounds(314, 24, 98, 23);
@@ -150,6 +158,16 @@ public class MonsterListWindow extends JFrame {
 		table = new JTable();
 		table.setModel(modelo);
 		scrollPane.setViewportView(table);
+		
+		JButton btnNewButton_2 = new JButton("Refresh");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				monsters = service.listAll();
+				modelo.updateData(monsters);
+			}
+		});
+		btnNewButton_2.setBounds(525, 71, 89, 23);
+		contentPane.add(btnNewButton_2);
 		// Impedir reordenação das colunas
         table.getTableHeader().setReorderingAllowed(false);
 //		table.setModel(new DefaultTableModel(

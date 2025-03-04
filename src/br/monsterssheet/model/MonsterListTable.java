@@ -55,4 +55,9 @@ public class MonsterListTable extends AbstractTableModel{
 	public String getColumnName(int column) {
 		return columns[column];
 	}
+	
+	public void updateData(List<Monster> monsters) {
+		this.monsters = monsters;
+		fireTableDataChanged();
+	}
 }

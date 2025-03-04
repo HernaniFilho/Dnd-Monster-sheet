@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import br.monsterssheet.controller.MonsterController;
+
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -13,6 +16,8 @@ import javax.swing.JTextArea;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ActionCreatorWindow extends JFrame {
 
@@ -95,6 +100,10 @@ public class ActionCreatorWindow extends JFrame {
 		contentPane.add(chckbxNewCheckBox);
 		
 		JButton btnNewButton = new JButton("Save");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton.setBounds(525, 77, 89, 23);
 		contentPane.add(btnNewButton);
 	}

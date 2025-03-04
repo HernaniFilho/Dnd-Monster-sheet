@@ -49,6 +49,13 @@ public class MonsterService {
             return false;
         }
         
+        List<Integer> proficiencies = proficiencyBonusValues();
+        Integer proficiency = monster.getProficiencyBonus();
+        if (!proficiencies.contains(proficiency)) {
+            System.out.println("Valor inválido para proeficiencia, favor verificar valores possiveis");
+            return false;
+        }
+        
         if(monster.getHitPoints() <= 0) {
             System.out.println("Pontos de vida não pode ser 0");
             return false;
@@ -85,10 +92,6 @@ public class MonsterService {
             System.out.println("Carisma não pode ser 0");
             return false;
         }
-        if(monster.getProficiencyBonus() < 0) {
-            System.out.println("Bonus de proeficiência não pode ser 0");
-            return false;
-        }
         return true;
     }
     //Valores possiveis para Challenge
@@ -104,7 +107,7 @@ public class MonsterService {
         String[] values = {"lawfull good","lawfull neutral","lawfull evil",
                             "neutral good","true neutral","neutral evil",
                             "chaotic good","chaotic neutral","chaotic evil",
-                            ""};
+                            "none"};
         List<String> valueList = new ArrayList<String>(Arrays.asList(values));
         return valueList;
 
@@ -118,6 +121,14 @@ public class MonsterService {
         List<String> valueList = new ArrayList<String>(Arrays.asList(values));
         return valueList;
     }
+    
+    // Valores possíveis para Proficiency Bonus
+    public List<Integer> proficiencyBonusValues() {
+    	Integer[] values = {2, 3, 4, 5, 6, 7, 8, 9};
+    	List<Integer> valueList = new ArrayList<Integer>(Arrays.asList(values));
+    	return valueList;
+    }
+    
     /*
      * Salva no banco de dados
      */

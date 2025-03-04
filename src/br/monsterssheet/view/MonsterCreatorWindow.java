@@ -1,10 +1,15 @@
 package br.monsterssheet.view;
 
+import java.awt.Component;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import br.monsterssheet.controller.MonsterController;
+import br.monsterssheet.model.service.MonsterService;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
@@ -18,8 +23,13 @@ import javax.swing.JSpinner;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.ListSelectionModel;
+import javax.swing.SpinnerNumberModel;
+
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class MonsterCreatorWindow extends JFrame {
 
@@ -58,6 +68,10 @@ public class MonsterCreatorWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public MonsterCreatorWindow() {
+		// Monster Controller
+		MonsterController controller = new MonsterController();
+		// Monster Service
+		MonsterService service = new MonsterService();
 		// Colocar icon
 		ImageIcon icon = new ImageIcon(this.getClass().getResource("/gold_chest.png"));
 		setIconImage(icon.getImage());
@@ -75,6 +89,7 @@ public class MonsterCreatorWindow extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		textField = new JTextField();
+		textField.setName("fieldName");
 		textField.setBounds(10, 30, 310, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
@@ -219,71 +234,178 @@ public class MonsterCreatorWindow extends JFrame {
 		panel_5.add(chckbxNewCheckBox_4);
 		
 		textField_1 = new JTextField();
+		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		textField_1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				digitKeyTypedOnly(e,textField_1);
+			}
+		});
+		textField_1.setName("fieldStrength");
 		textField_1.setBounds(28, 241, 50, 50);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
 		textField_2 = new JTextField();
+		textField_2.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		textField_2.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				digitKeyTypedOnly(e,textField_2);
+			}
+		});
+		textField_2.setName("fieldDexterity");
 		textField_2.setColumns(10);
 		textField_2.setBounds(124, 236, 50, 50);
 		contentPane.add(textField_2);
 		
 		textField_3 = new JTextField();
+		textField_3.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_3.setFont(new Font("Tahoma", Font.BOLD, 14));
+		textField_3.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				digitKeyTypedOnly(e,textField_3);
+			}
+		});
+		textField_3.setName("fieldConstitution");
 		textField_3.setColumns(10);
 		textField_3.setBounds(236, 236, 50, 50);
 		contentPane.add(textField_3);
 		
 		textField_4 = new JTextField();
+		textField_4.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_4.setFont(new Font("Tahoma", Font.BOLD, 14));
+		textField_4.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				digitKeyTypedOnly(e,textField_4);
+			}
+		});
+		textField_4.setName("fieldInteligence");
 		textField_4.setColumns(10);
 		textField_4.setBounds(359, 236, 50, 50);
 		contentPane.add(textField_4);
 		
 		textField_5 = new JTextField();
+		textField_5.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_5.setFont(new Font("Tahoma", Font.BOLD, 14));
+		textField_5.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				digitKeyTypedOnly(e,textField_5);
+			}
+		});
+		textField_5.setName("fieldWisdom");
 		textField_5.setColumns(10);
 		textField_5.setBounds(457, 236, 50, 50);
 		contentPane.add(textField_5);
 		
 		textField_6 = new JTextField();
+		textField_6.setFont(new Font("Tahoma", Font.BOLD, 14));
+		textField_6.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_6.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				digitKeyTypedOnly(e,textField_6);
+			}
+		});
+		textField_6.setName("fieldCharisma");
 		textField_6.setColumns(10);
 		textField_6.setBounds(544, 236, 50, 50);
 		contentPane.add(textField_6);
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.setName("comboBoxType");
 		comboBox.setBounds(42, 57, 105, 22);
+		// Types dos Monstros
+		List<String> types = service.typeValues();
+		for(String type: types) {
+			comboBox.addItem(type);
+		}
 		contentPane.add(comboBox);
 		
 		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setName("comboBoxAlignment");
+		// Alignment dos Monstros
+		List<String> alignments = service.alignmentValues();
+		for(String alignment: alignments) {
+			comboBox_1.addItem(alignment);
+		}
 		comboBox_1.setBounds(213, 57, 107, 22);
 		contentPane.add(comboBox_1);
 		
 		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2.setName("comboBoxChallenge");
+		// Challenge dos Monstros
+		List<String> challenges = service.challengeValues();
+		for(String challenge: challenges) {
+			comboBox_2.addItem(challenge);
+		}
 		comboBox_2.setBounds(252, 82, 68, 22);
 		contentPane.add(comboBox_2);
 		
 		textField_7 = new JTextField();
+		textField_7.setFont(new Font("Tahoma", Font.BOLD, 14));
+		textField_7.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_7.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				digitKeyTypedOnly(e,textField_7);
+			}
+		});
+		textField_7.setName("fieldArmor");
 		textField_7.setColumns(10);
 		textField_7.setBounds(28, 133, 50, 50);
 		contentPane.add(textField_7);
 		
 		textField_8 = new JTextField();
+		textField_8.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_8.setFont(new Font("Tahoma", Font.BOLD, 14));
+		textField_8.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				digitKeyTypedOnly(e,textField_8);
+			}
+		});
+		textField_8.setName("fieldHitPoints");
 		textField_8.setColumns(10);
 		textField_8.setBounds(124, 133, 50, 50);
 		contentPane.add(textField_8);
 		
 		textField_9 = new JTextField();
+		textField_9.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_9.setFont(new Font("Tahoma", Font.BOLD, 14));
+		textField_9.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				digitKeyTypedOnly(e,textField_9);
+			}
+		});
+		textField_9.setName("fieldSpeed");
 		textField_9.setColumns(10);
 		textField_9.setBounds(236, 133, 50, 50);
 		contentPane.add(textField_9);
 		
-		JSpinner spinner = new JSpinner();
+		// Proficiency dos Monstros
+		List<Integer> proficiencies = service.proficiencyBonusValues();
+		int min = proficiencies.getFirst();
+		int max = proficiencies.getLast();
+		
+		JSpinner spinner = new JSpinner(new SpinnerNumberModel(min,min,max,1));
+		spinner.setName("spinnerProficiency");
 		spinner.setBounds(106, 83, 41, 20);
 		contentPane.add(spinner);
 		
 		JList list = new JList();
+		list.setName("listLanguages");
 		list.setBounds(330, 32, 108, 151);
 		contentPane.add(list);
 		
 		JList list_1 = new JList();
+		list_1.setName("listActions");
 		list_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list_1.setBounds(457, 32, 155, 92);
 		contentPane.add(list_1);
@@ -291,6 +413,10 @@ public class MonsterCreatorWindow extends JFrame {
 		JButton btnNewButton = new JButton("Add Action...");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ActionCreatorWindow actionCreatorWindow =  new ActionCreatorWindow();
+				actionCreatorWindow.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+				actionCreatorWindow.setLocationRelativeTo(actionCreatorWindow);
+				actionCreatorWindow.setVisible(true);
 			}
 		});
 		btnNewButton.setBounds(457, 133, 155, 23);
@@ -303,5 +429,41 @@ public class MonsterCreatorWindow extends JFrame {
 		});
 		btnNewButton_1.setBounds(457, 160, 155, 23);
 		contentPane.add(btnNewButton_1);
+		
+		JLabel lblNewLabel_15 = new JLabel("Languages");
+		lblNewLabel_15.setBounds(334, 11, 84, 14);
+		contentPane.add(lblNewLabel_15);
+		
+		JLabel lblNewLabel_16 = new JLabel("Actions");
+		lblNewLabel_16.setBounds(461, 11, 46, 14);
+		contentPane.add(lblNewLabel_16);
+		
+		JButton btnNewButton_2 = new JButton("Save");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.execute(contentPane);
+			}
+		});
+		btnNewButton_2.setBounds(267, 393, 89, 23);
+		contentPane.add(btnNewButton_2);
+	}
+	
+	public Component findComponentByName(String name) {
+		for(Component comp : this.getComponents()) {
+			if(name.equals(comp.getName())) {
+				return comp;
+			}
+		}
+		return null;
+	}
+	
+	// Para usar em todos os campos que usam apenas numeros em JTextField
+	private void digitKeyTypedOnly(KeyEvent e, JTextField t) {
+		String text = t.getText();
+		char c = e.getKeyChar();
+        // Permite apenas números
+        if (text.length() >= 2 | !Character.isDigit(c)) {
+            e.consume();  // Impede a digitação de caracteres não numéricos
+        }
 	}
 }
