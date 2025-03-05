@@ -8,7 +8,7 @@ import br.monsterssheet.model.service.ActionService;
 public class ActionController implements IController {
 
     @Override
-    public void execute(Object view) {
+    public boolean execute(Object view) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'execute'");
     }

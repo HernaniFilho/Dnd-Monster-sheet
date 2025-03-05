@@ -9,7 +9,7 @@ import br.monsterssheet.model.service.LanguageService;
 public class LanguageController implements IController {
 
     @Override
-    public void execute(Object view) {
+    public boolean execute(Object view) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'execute'");
     }

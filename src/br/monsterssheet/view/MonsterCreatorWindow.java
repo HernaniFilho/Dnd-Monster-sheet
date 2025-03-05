@@ -441,20 +441,20 @@ public class MonsterCreatorWindow extends JFrame {
 		JButton btnNewButton_2 = new JButton("Save");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.execute(contentPane);
+				try {
+					if(controller.execute(contentPane)) {
+						System.out.println("Monster criado com sucesso");
+						dispose();
+					} else {
+						System.out.println("Erro ao criar monstro");
+					}
+				} catch(Exception ex) {
+					System.out.println("Exception ao criar monstro");
+				}
 			}
 		});
 		btnNewButton_2.setBounds(267, 393, 89, 23);
 		contentPane.add(btnNewButton_2);
-	}
-	
-	public Component findComponentByName(String name) {
-		for(Component comp : this.getComponents()) {
-			if(name.equals(comp.getName())) {
-				return comp;
-			}
-		}
-		return null;
 	}
 	
 	// Para usar em todos os campos que usam apenas numeros em JTextField

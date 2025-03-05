@@ -16,141 +16,141 @@ import br.monsterssheet.view.MonsterCreatorWindow;
 public class MonsterController implements IController{
 
     @Override
-    public void execute(Object view) {
-        if(view instanceof MonsterCreatorWindow) {
+    public boolean execute(Object view) {
+        if(view instanceof JPanel) {
         	String name, type, alignment, challenge;
         	int armorClass, hitPoints, speed, strength, dexterity, constitution, intelligence, wisdom, charisma, proficiencyBonus;
         	
         	
-        	MonsterCreatorWindow contentPane = (MonsterCreatorWindow)view;
+        	JPanel contentPane = (JPanel)view;
         	MonsterService service = new MonsterService();
         	
         	
         	// Implementar Classe de Error futuramente
-        	Component c = contentPane.findComponentByName("fieldName");
+        	Component c = IController.findComponentByName("fieldName", contentPane);
         	if(c instanceof JTextField) {
         		JTextField fieldName = (JTextField)c;
         		name = fieldName.getText();
         	} else {
         		System.out.println("fieldName não existe");
-        		return;
+        		return false;
         	}
         	
-        	c = contentPane.findComponentByName("comboBoxType");
+        	c = IController.findComponentByName("comboBoxType", contentPane);
         	if(c instanceof JComboBox) {
         		JComboBox comboBoxType = (JComboBox)c;
         		type = comboBoxType.getSelectedItem().toString();
         	} else {
         		System.out.println("comboBoxType não existe");
-        		return;
+        		return false;
         	}
         	
-        	c = contentPane.findComponentByName("comboBoxAlignment");
+        	c = IController.findComponentByName("comboBoxAlignment", contentPane);
         	if(c instanceof JComboBox) {
         		JComboBox comboBoxAlignment = (JComboBox)c;
         		alignment = comboBoxAlignment.getSelectedItem().toString();
         	} else {
         		System.out.println("comboBoxAlignment não existe");
-        		return;
+        		return false;
         	}
         	
-        	c = contentPane.findComponentByName("comboBoxChallenge");
+        	c = IController.findComponentByName("comboBoxChallenge", contentPane);
         	if(c instanceof JComboBox) {
         		JComboBox comboBoxChallenge = (JComboBox)c;
         		challenge = comboBoxChallenge.getSelectedItem().toString();
         	} else {
         		System.out.println("comboBoxChallenge não existe");
-        		return;
+        		return false;
         	}
         	
-        	c = contentPane.findComponentByName("fieldArmor");
+        	c = IController.findComponentByName("fieldArmor", contentPane);
         	if(c instanceof JTextField) {
         		JTextField fieldArmor = (JTextField)c;
         		armorClass = Integer.parseInt(fieldArmor.getText());
         	} else {
         		System.out.println("fieldArmor não existe");
-        		return;
+        		return false;
         	}
         	
-        	c = contentPane.findComponentByName("fieldHitPoints");
+        	c = IController.findComponentByName("fieldHitPoints", contentPane);
         	if(c instanceof JTextField) {
         		JTextField fieldHitPoints = (JTextField)c;
         		hitPoints = Integer.parseInt(fieldHitPoints.getText());
         	} else {
         		System.out.println("fieldHitPoints não existe");
-        		return;
+        		return false;
         	}
         	
-        	c = contentPane.findComponentByName("fieldSpeed");
+        	c = IController.findComponentByName("fieldSpeed", contentPane);
         	if(c instanceof JTextField) {
         		JTextField fieldSpeed = (JTextField)c;
         		speed = Integer.parseInt(fieldSpeed.getText());
         	} else {
         		System.out.println("fieldSpeed não existe");
-        		return;
+        		return false;
         	}
         	
-        	c = contentPane.findComponentByName("fieldStrength");
+        	c = IController.findComponentByName("fieldStrength", contentPane);
         	if(c instanceof JTextField) {
         		JTextField fieldStrength = (JTextField)c;
         		strength = Integer.parseInt(fieldStrength.getText());
         	} else {
         		System.out.println("fieldStrength não existe");
-        		return;
+        		return false;
         	}
         	
-        	c = contentPane.findComponentByName("fieldDexterity");
+        	c = IController.findComponentByName("fieldDexterity", contentPane);
         	if(c instanceof JTextField) {
         		JTextField fieldDexterity = (JTextField)c;
         		dexterity = Integer.parseInt(fieldDexterity.getText());
         	} else {
         		System.out.println("fieldDexterity não existe");
-        		return;
+        		return false;
         	}
         	
-        	c = contentPane.findComponentByName("fieldConstitution");
+        	c = IController.findComponentByName("fieldConstitution", contentPane);
         	if(c instanceof JTextField) {
         		JTextField fieldConstitution = (JTextField)c;
         		constitution = Integer.parseInt(fieldConstitution.getText());
         	} else {
         		System.out.println("fieldConstitution não existe");
-        		return;
+        		return false;
         	}
         	
-        	c = contentPane.findComponentByName("fieldInteligence");
+        	c = IController.findComponentByName("fieldInteligence", contentPane);
         	if(c instanceof JTextField) {
         		JTextField fieldInteligence = (JTextField)c;
         		intelligence = Integer.parseInt(fieldInteligence.getText());
         	} else {
         		System.out.println("fieldInteligence não existe");
-        		return;
+        		return false;
         	}
         	
-        	c = contentPane.findComponentByName("fieldWisdom");
+        	c = IController.findComponentByName("fieldWisdom", contentPane);
         	if(c instanceof JTextField) {
         		JTextField fieldWisdom = (JTextField)c;
         		wisdom = Integer.parseInt(fieldWisdom.getText());
         	} else {
         		System.out.println("fieldWisdom não existe");
-        		return;
+        		return false;
         	}
         	
-        	c = contentPane.findComponentByName("fieldCharisma");
+        	c = IController.findComponentByName("fieldCharisma", contentPane);
         	if(c instanceof JTextField) {
         		JTextField fieldCharisma = (JTextField)c;
         		charisma = Integer.parseInt(fieldCharisma.getText());
         	} else {
         		System.out.println("fieldCharisma não existe");
-        		return;
+        		return false;
         	}
         	
-        	c = contentPane.findComponentByName("spinnerProficiency");
+        	c = IController.findComponentByName("spinnerProficiency", contentPane);
         	if(c instanceof JSpinner) {
         		JSpinner spinnerProficiency = (JSpinner)c;
         		proficiencyBonus = (Integer) spinnerProficiency.getValue();
         	} else {
         		System.out.println("spinnerProficiency não existe");
-        		return;
+        		return false;
         	}
         	// Checar outros atributos aqui e depois detá-los corretamente no banco de dados, i.e languages, savingThrows, actions
         	
@@ -173,8 +173,12 @@ public class MonsterController implements IController{
         	m.setProficiencyBonus(proficiencyBonus);
         	
         	int idMonster = service.save(m);
+        	return true;
         }
+        return false;
     }
+    
+    
 
     /*
      * Apenas para testes
