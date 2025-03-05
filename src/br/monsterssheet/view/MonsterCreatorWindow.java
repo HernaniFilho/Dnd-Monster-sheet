@@ -73,7 +73,7 @@ public class MonsterCreatorWindow extends JFrame {
 		// Monster Service
 		MonsterService service = new MonsterService();
 		// Colocar icon
-		ImageIcon icon = new ImageIcon(this.getClass().getResource("/gold_chest.png"));
+		ImageIcon icon = new ImageIcon(this.getClass().getResource("/br/monsterssheet/view/gold_chest.png"));
 		setIconImage(icon.getImage());
 		setTitle("Monster Sheet - Monster Creator");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

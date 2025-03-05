@@ -49,7 +49,7 @@ public class ActionCreatorWindow extends JFrame {
 	 */
 	public ActionCreatorWindow() {
 		// Colocar icon
-		ImageIcon icon = new ImageIcon(this.getClass().getResource("/gold_chest.png"));
+		ImageIcon icon = new ImageIcon(this.getClass().getResource("/br/monsterssheet/view/gold_chest.png"));
 		setIconImage(icon.getImage());
 		setResizable(false);
 		setTitle("Monster Sheet - Action Creator");
