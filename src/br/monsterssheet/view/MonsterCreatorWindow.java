@@ -5,9 +5,11 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import br.monsterssheet.controller.MonsterController;
+import br.monsterssheet.model.service.LanguageService;
 import br.monsterssheet.model.service.MonsterService;
 
 import javax.swing.JLabel;
@@ -20,6 +22,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JList;
 import javax.swing.JSpinner;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.ListSelectionModel;
@@ -72,6 +75,8 @@ public class MonsterCreatorWindow extends JFrame {
 		MonsterController controller = new MonsterController();
 		// Monster Service
 		MonsterService service = new MonsterService();
+		// Language Service
+		LanguageService languageService = new LanguageService();
 		// Colocar icon
 		ImageIcon icon = new ImageIcon(this.getClass().getResource("/br/monsterssheet/view/gold_chest.png"));
 		setIconImage(icon.getImage());
@@ -399,17 +404,6 @@ public class MonsterCreatorWindow extends JFrame {
 		spinner.setBounds(106, 83, 41, 20);
 		contentPane.add(spinner);
 		
-		JList list = new JList();
-		list.setName("listLanguages");
-		list.setBounds(330, 32, 108, 151);
-		contentPane.add(list);
-		
-		JList list_1 = new JList();
-		list_1.setName("listActions");
-		list_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list_1.setBounds(457, 32, 155, 92);
-		contentPane.add(list_1);
-		
 		JButton btnNewButton = new JButton("Add Action...");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -455,6 +449,31 @@ public class MonsterCreatorWindow extends JFrame {
 		});
 		btnNewButton_2.setBounds(267, 393, 89, 23);
 		contentPane.add(btnNewButton_2);
+		
+		// Adicionando as linguagens
+		DefaultListModel<String> listModel = new DefaultListModel<String>();
+		List<String> languages = languageService.languageValues();
+		for(String language: languages) {
+			listModel.addElement(language);
+		}
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(330, 30, 108, 151);
+		scrollPane.setName("scrollPaneLanguages");
+		contentPane.add(scrollPane);
+		JList list = new JList(listModel);
+		scrollPane.setViewportView(list);
+		list.setName("listLanguages");
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setName("scrollPaneActions");
+		scrollPane_1.setBounds(457, 30, 155, 92);
+		contentPane.add(scrollPane_1);
+		
+		JList list_1 = new JList();
+		scrollPane_1.setViewportView(list_1);
+		list_1.setName("listActions");
+		list_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	}
 	
 	// Para usar em todos os campos que usam apenas numeros em JTextField

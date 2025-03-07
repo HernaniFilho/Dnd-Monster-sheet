@@ -14,6 +14,17 @@ public class LanguageController implements IController {
         throw new UnsupportedOperationException("Unimplemented method 'execute'");
     }
     
+    public boolean execute(int idMonster, List<String> languages) {
+    	LanguageService service = new LanguageService();
+		Language language = new Language();
+		language.setIdMonster(idMonster);
+		for (String name : languages) {
+			language.setName(name);
+			service.save(language);
+		}
+		return true;
+    }
+    
     // Apenas para testes
     public static void main(String[] args) {
         Language language = new Language();

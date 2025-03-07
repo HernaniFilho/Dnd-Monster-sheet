@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JComboBox;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
@@ -20,10 +22,11 @@ public class MonsterController implements IController{
         if(view instanceof JPanel) {
         	String name, type, alignment, challenge;
         	int armorClass, hitPoints, speed, strength, dexterity, constitution, intelligence, wisdom, charisma, proficiencyBonus;
-        	
+        	List<String> languages = new ArrayList<String>();
         	
         	JPanel contentPane = (JPanel)view;
         	MonsterService service = new MonsterService();
+        	LanguageController languageController = new LanguageController();
         	
         	
         	// Implementar Classe de Error futuramente
@@ -154,8 +157,23 @@ public class MonsterController implements IController{
         	}
         	// Checar outros atributos aqui e depois detá-los corretamente no banco de dados, i.e languages, savingThrows, actions
         	
+        	c = IController.findComponentByName("scrollPaneLanguages", contentPane);
+        	if(c instanceof JScrollPane) {
+        		JScrollPane scrollPaneLanguages = (JScrollPane)c;
+        		if(scrollPaneLanguages.getViewport().getView() instanceof JList) {
+					JList<String> listLanguages = (JList)scrollPaneLanguages.getViewport().getView();
+					languages = listLanguages.getSelectedValuesList();
+				} else {
+					System.out.println("listLanguages não existe");
+					return false;
+				}
+        	} else {
+        		System.out.println("scrollPaneLanguages não existe");
+        		return false;
+        	}
         	
         	
+        	// Salva no banco de dados
         	Monster m = new Monster();
         	m.setName(name);
         	m.setType(type);
@@ -173,6 +191,8 @@ public class MonsterController implements IController{
         	m.setProficiencyBonus(proficiencyBonus);
         	
         	int idMonster = service.save(m);
+        	
+        	languageController.execute(idMonster, languages);
         	return true;
         }
         return false;
