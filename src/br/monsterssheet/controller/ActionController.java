@@ -13,7 +13,14 @@ public class ActionController implements IController {
         throw new UnsupportedOperationException("Unimplemented method 'execute'");
     }
     
-    
+    public boolean save(int idMonster, List<Action> actions) {
+		ActionService service = new ActionService();
+		for (Action action : actions) {
+			action.setIdMonster(idMonster);
+			service.save(action);
+		}
+		return true;
+	}
     public boolean remove(int idMonster) {
 		ActionService service = new ActionService();
 		service.deleteByIdMonster(idMonster);

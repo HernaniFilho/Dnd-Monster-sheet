@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -11,6 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
+import br.monsterssheet.model.entity.Action;
 import br.monsterssheet.model.entity.Monster;
 import br.monsterssheet.model.service.MonsterService;
 import br.monsterssheet.view.MonsterCreatorWindow;
@@ -23,11 +25,12 @@ public class MonsterController implements IController{
         	String name, type, alignment, challenge;
         	int armorClass, hitPoints, speed, strength, dexterity, constitution, intelligence, wisdom, charisma, proficiencyBonus;
         	List<String> languages = new ArrayList<String>();
+        	List<Action> actions = new ArrayList<Action>();
         	
         	JPanel contentPane = (JPanel)view;
         	MonsterService service = new MonsterService();
         	LanguageController languageController = new LanguageController();
-        	
+        	ActionController actionController = new ActionController();
         	
         	// Implementar Classe de Error futuramente
         	Component c = IController.findComponentByName("fieldName", contentPane);
@@ -161,6 +164,7 @@ public class MonsterController implements IController{
         	if(c instanceof JScrollPane) {
         		JScrollPane scrollPaneLanguages = (JScrollPane)c;
         		if(scrollPaneLanguages.getViewport().getView() instanceof JList) {
+        			// Talvez mudar para DefaultListModel<String> listModel = (DefaultListModel<String>) ((JList<?>) scrollPaneLanguages.getViewport().getView()).getModel();
 					JList<String> listLanguages = (JList)scrollPaneLanguages.getViewport().getView();
 					languages = listLanguages.getSelectedValuesList();
 				} else {
@@ -172,8 +176,26 @@ public class MonsterController implements IController{
         		return false;
         	}
         	
+        	c = IController.findComponentByName("scrollPaneActions", contentPane);
+        	if(c instanceof JScrollPane) {
+        		JScrollPane scrollPaneActions = (JScrollPane)c;
+        		if(scrollPaneActions.getViewport().getView() instanceof JList) {
+        			DefaultListModel<Action> listModel = (DefaultListModel<Action>) ((JList<?>) scrollPaneActions.getViewport().getView()).getModel();
+    				for (int i = 0; i < listModel.getSize(); i++) {
+						Action action = listModel.getElementAt(i);
+						actions.add(action);
+					}
+				} else {
+					System.out.println("listActions não existe");
+					return false;
+				}
+        	} else {
+        		System.out.println("scrollPaneActions não existe");
+        		return false;
+        	}
         	
-        	// Salva no banco de dados
+        	
+        	// Setar os atributos do monstro
         	Monster m = new Monster();
         	m.setName(name);
         	m.setType(type);
@@ -189,10 +211,13 @@ public class MonsterController implements IController{
         	m.setWisdom(wisdom);
         	m.setCharisma(charisma);
         	m.setProficiencyBonus(proficiencyBonus);
-        	
+        	// Salva no banco de dados
         	int idMonster = service.save(m);
-        	
+        	// Salva languages
         	languageController.save(idMonster, languages);
+        	// Salva actions
+        	actionController.save(idMonster, actions);
+        	
         	return true;
         }
         return false;

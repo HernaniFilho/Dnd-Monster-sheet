@@ -1,5 +1,6 @@
 package br.monsterssheet.view;
 
+import java.awt.Component;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -35,7 +36,6 @@ public class ActionCreatorWindow extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JScrollPane scrollPane;
-	private JList actions;
 
 	/**
 	 * Launch the application.
@@ -145,10 +145,16 @@ public class ActionCreatorWindow extends JFrame {
 					return;
 				}
 				
-				DefaultListModel<Action> listModel = scrollPane.getViewport().getView() instanceof JList ? (DefaultListModel<Action>) actions.getModel() : new DefaultListModel<Action>();
-				actions = new JList<>(listModel);
+				Component view = scrollPane.getViewport().getView();
+				if (view instanceof JList) {
+				    DefaultListModel<Action> listModel = (DefaultListModel<Action>) ((JList<?>) view).getModel();
+				    listModel.addElement(action);
+				}
 
-				listModel.addElement(action);
+				//DefaultListModel<Action> listModel = scrollPane.getViewport().getView() instanceof JList ? (DefaultListModel<Action>) actions.getModel() : new DefaultListModel<Action>();
+				//actions = new JList<>(listModel);
+
+				
 				
 				//scrollPane.setViewportView(actions);
 				//scrollPane.getViewport().setView(actions);
@@ -163,14 +169,9 @@ public class ActionCreatorWindow extends JFrame {
 		// Checar as actions no scrollPane
 		try {
 			JList actions = (JList) scrollPane.getViewport().getView();
-			setList(actions);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public void setList(JList list) {
-		actions = list;
 	}
 	
 	// Para usar em todos os campos que usam apenas numeros em JTextField
