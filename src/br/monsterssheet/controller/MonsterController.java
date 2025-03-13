@@ -192,12 +192,33 @@ public class MonsterController implements IController{
         	
         	int idMonster = service.save(m);
         	
-        	languageController.execute(idMonster, languages);
+        	languageController.save(idMonster, languages);
         	return true;
         }
         return false;
     }
     
+    public boolean remove(String monsterName) {
+		MonsterService service = new MonsterService();
+		List<Monster> monsters = service.findByName(monsterName);
+		if(monsters.size() == 0) {
+			System.out.println("Monster não encontrado");
+			return false;
+		}
+		Monster monster = monsters.get(0);
+		// Remover languages
+		LanguageController languageController = new LanguageController();
+		languageController.remove(monster.getId());
+		// Remover savingThrows
+		SavingThrowController savingThrowController = new SavingThrowController();
+		savingThrowController.remove(monster.getId());
+		// Remover actions
+		ActionController actionController = new ActionController();
+		actionController.remove(monster.getId());
+		// Remover monster
+		service.deleteById(monster.getId());
+		return true;
+	}
     
 
     /*

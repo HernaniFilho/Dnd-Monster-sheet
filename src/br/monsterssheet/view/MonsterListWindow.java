@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -17,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
+import br.monsterssheet.controller.MonsterController;
 import br.monsterssheet.model.MonsterListTable;
 import br.monsterssheet.model.entity.Monster;
 import br.monsterssheet.model.service.MonsterService;
@@ -29,6 +31,8 @@ public class MonsterListWindow extends JFrame {
 	private JTable table;
 	
 	private static List<Monster> monsters;
+	
+	private MonsterListWindow frame;
 
 	/**
 	 * Launch the application.
@@ -53,9 +57,13 @@ public class MonsterListWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public MonsterListWindow() {
+		// Setar frame
+		frame = this;
 		// Monster Service
 		MonsterService service = new MonsterService();
 		monsters = service.listAll();
+		// Monster Controller
+		MonsterController controller = new MonsterController();
 		// Colocar icon
 		ImageIcon icon = new ImageIcon(this.getClass().getResource("/br/monsterssheet/view/gold_chest.png"));
 		setIconImage(icon.getImage());
@@ -136,14 +144,6 @@ public class MonsterListWindow extends JFrame {
 		btnNewButton.setBounds(314, 24, 98, 23);
 		contentPane.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Remove...");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton_1.setBounds(422, 24, 98, 23);
-		contentPane.add(btnNewButton_1);
-		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 104, 604, 326);
 		contentPane.add(scrollPane);
@@ -166,15 +166,28 @@ public class MonsterListWindow extends JFrame {
 		contentPane.add(btnNewButton_2);
 		// Impedir reordenação das colunas
         table.getTableHeader().setReorderingAllowed(false);
-//		table.setModel(new DefaultTableModel(
-//			new Object[][] {
-//			},
-//			new String[] {
-//				"Name", "Hit Points", "Armor Class", "Challenge Rating", "Type", "Alignment"
-//			}
-//		));
-//		table.getColumnModel().getColumn(3).setPreferredWidth(94);
-//		table.getColumnModel().getColumn(3).setMinWidth(20);
+        
+        JButton btnNewButton_1 = new JButton("Remove...");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int selectedRow = table.getSelectedRow(); // obter indice da linha selecionada
+				if(selectedRow == -1) {
+					JOptionPane.showMessageDialog(frame, "Selecione uma linha para remover", "Aviso", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+				String name = (String) table.getValueAt(selectedRow, 0);
+				if(controller.remove(name)) {
+					JOptionPane.showMessageDialog(frame, "Monstro removido com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(frame, "Erro ao remover monstro", "Erro", JOptionPane.ERROR_MESSAGE);
+				}
+				monsters = service.listAll();
+				modelo.updateData(monsters);
+			}
+		});
+		btnNewButton_1.setBounds(422, 24, 98, 23);
+		contentPane.add(btnNewButton_1);
+        
         
 	}
 }

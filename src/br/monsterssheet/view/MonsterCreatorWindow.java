@@ -9,6 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import br.monsterssheet.controller.MonsterController;
+import br.monsterssheet.model.entity.Action;
 import br.monsterssheet.model.service.LanguageService;
 import br.monsterssheet.model.service.MonsterService;
 
@@ -21,6 +22,7 @@ import javax.swing.UIManager;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -48,7 +50,9 @@ public class MonsterCreatorWindow extends JFrame {
 	private JTextField textField_7;
 	private JTextField textField_8;
 	private JTextField textField_9;
-
+	
+	private MonsterCreatorWindow frame;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -71,6 +75,9 @@ public class MonsterCreatorWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public MonsterCreatorWindow() {
+		// Setar frame
+		frame = this;
+		
 		// Monster Controller
 		MonsterController controller = new MonsterController();
 		// Monster Service
@@ -404,26 +411,6 @@ public class MonsterCreatorWindow extends JFrame {
 		spinner.setBounds(106, 83, 41, 20);
 		contentPane.add(spinner);
 		
-		JButton btnNewButton = new JButton("Add Action...");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ActionCreatorWindow actionCreatorWindow =  new ActionCreatorWindow();
-				actionCreatorWindow.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-				actionCreatorWindow.setLocationRelativeTo(actionCreatorWindow);
-				actionCreatorWindow.setVisible(true);
-			}
-		});
-		btnNewButton.setBounds(457, 133, 155, 23);
-		contentPane.add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("Remove Action...");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton_1.setBounds(457, 160, 155, 23);
-		contentPane.add(btnNewButton_1);
-		
 		JLabel lblNewLabel_15 = new JLabel("Languages");
 		lblNewLabel_15.setBounds(334, 11, 84, 14);
 		contentPane.add(lblNewLabel_15);
@@ -444,6 +431,10 @@ public class MonsterCreatorWindow extends JFrame {
 					}
 				} catch(Exception ex) {
 					System.out.println("Exception ao criar monstro");
+					ex.printStackTrace();
+					// Interresante usar um JOptionPane para informar o usuário
+					// Adicionar o que ocorrreu de erro
+			        JOptionPane.showMessageDialog(frame, "Ocorreu um erro ao criar um monstro", "Aviso", JOptionPane.WARNING_MESSAGE);
 				}
 			}
 		});
@@ -470,10 +461,42 @@ public class MonsterCreatorWindow extends JFrame {
 		scrollPane_1.setBounds(457, 30, 155, 92);
 		contentPane.add(scrollPane_1);
 		
-		JList list_1 = new JList();
+		// Criar o modelo de ações
+		DefaultListModel<Action> listActions = new DefaultListModel<>();
+		JList<Action> list_1 = new JList<>(listActions);
+		
 		scrollPane_1.setViewportView(list_1);
 		list_1.setName("listActions");
 		list_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		JButton btnNewButton = new JButton("Add Action...");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ActionCreatorWindow actionCreatorWindow =  new ActionCreatorWindow();
+				actionCreatorWindow.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+				actionCreatorWindow.setLocationRelativeTo(actionCreatorWindow);
+				actionCreatorWindow.setVisible(true);
+				actionCreatorWindow.setScrollPane(scrollPane_1);
+			}
+		});
+		btnNewButton.setBounds(457, 133, 155, 23);
+		contentPane.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Remove Action...");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				    int selectedIndex = list_1.getSelectedIndex(); // Obtém o índice do item selecionado
+				    if (selectedIndex != -1) { // Verifica se há um item selecionado
+				        listActions.remove(selectedIndex); // Remove o item do modelo
+				    } else {
+				    	// Interresante usar um JOptionPane para informar o usuário
+				        JOptionPane.showMessageDialog(frame, "Selecione uma action para remover!", "Aviso", JOptionPane.WARNING_MESSAGE);
+				    }
+			}
+		});
+		btnNewButton_1.setBounds(457, 160, 155, 23);
+		contentPane.add(btnNewButton_1);
 	}
 	
 	// Para usar em todos os campos que usam apenas numeros em JTextField

@@ -12,7 +12,13 @@ public class ActionController implements IController {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'execute'");
     }
-
+    
+    
+    public boolean remove(int idMonster) {
+		ActionService service = new ActionService();
+		service.deleteByIdMonster(idMonster);
+		return true;
+	}
     /*
      * Apenas para testes
      */

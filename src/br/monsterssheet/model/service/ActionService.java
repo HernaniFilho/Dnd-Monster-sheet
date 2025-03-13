@@ -46,7 +46,7 @@ public class ActionService {
         }
 
         // cheacar se idMonster é válido
-        if(action.getIdMonster() <= 0) {
+        if(action.getIdMonster() < 0) {
             System.out.println("IdMonster inválido");
             return false;
         }

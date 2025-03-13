@@ -53,6 +53,6 @@ public class Action {
     }
 
     public String toString() {
-        return "idMonster: "+idMonster+" action name: "+name+" type: "+type+" range: "+actionRange+" isLegendary: "+isLegendary+"\n description: "+description;
+        return name+" ("+type+")("+actionRange+")";
     }    
 }

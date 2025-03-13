@@ -14,6 +14,12 @@ public class SavingThrowController implements IController{
         throw new UnsupportedOperationException("Unimplemented method 'execute'");
     }
 
+    public boolean remove(int idMonster) {
+		SavingThrowService service = new SavingThrowService();
+		service.deleteByIdMonster(idMonster);
+		return true;
+	}
+    
     /*
      * Apenas para testes
      */

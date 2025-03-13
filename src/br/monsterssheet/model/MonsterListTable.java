@@ -30,7 +30,6 @@ public class MonsterListTable extends AbstractTableModel{
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
 		Monster monster = monsters.get(rowIndex);
 		switch (columnIndex) {
 		case 0:
