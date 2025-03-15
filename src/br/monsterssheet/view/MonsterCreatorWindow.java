@@ -167,91 +167,13 @@ public class MonsterCreatorWindow extends JFrame {
 		lblNewLabel_13.setBounds(10, 86, 95, 14);
 		contentPane.add(lblNewLabel_13);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(19, 297, 68, 63);
-		contentPane.add(panel);
-		panel.setLayout(null);
-		
-		JLabel lblNewLabel_14 = new JLabel("<html>Saving<br>Throw</html>");
-		lblNewLabel_14.setBounds(16, 24, 32, 28);
-		panel.add(lblNewLabel_14);
-		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("");
-		chckbxNewCheckBox.setBounds(22, 5, 21, 21);
-		panel.add(chckbxNewCheckBox);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setLayout(null);
-		panel_1.setBounds(115, 297, 68, 63);
-		contentPane.add(panel_1);
-		
-		JLabel lblNewLabel_14_1 = new JLabel("<html>Saving<br>Throw</html>");
-		lblNewLabel_14_1.setBounds(16, 24, 32, 28);
-		panel_1.add(lblNewLabel_14_1);
-		
-		JCheckBox chckbxNewCheckBox_6 = new JCheckBox("");
-		chckbxNewCheckBox_6.setBounds(22, 5, 21, 21);
-		panel_1.add(chckbxNewCheckBox_6);
-		
-		JPanel panel_2 = new JPanel();
-		panel_2.setLayout(null);
-		panel_2.setBounds(227, 297, 68, 63);
-		contentPane.add(panel_2);
-		
-		JLabel lblNewLabel_14_2 = new JLabel("<html>Saving<br>Throw</html>");
-		lblNewLabel_14_2.setBounds(16, 24, 32, 28);
-		panel_2.add(lblNewLabel_14_2);
-		
-		JCheckBox chckbxNewCheckBox_1 = new JCheckBox("");
-		chckbxNewCheckBox_1.setBounds(22, 5, 21, 21);
-		panel_2.add(chckbxNewCheckBox_1);
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setLayout(null);
-		panel_3.setBounds(350, 297, 68, 63);
-		contentPane.add(panel_3);
-		
-		JLabel lblNewLabel_14_3 = new JLabel("<html>Saving<br>Throw</html>");
-		lblNewLabel_14_3.setBounds(16, 24, 32, 28);
-		panel_3.add(lblNewLabel_14_3);
-		
-		JCheckBox chckbxNewCheckBox_2 = new JCheckBox("");
-		chckbxNewCheckBox_2.setBounds(22, 5, 21, 21);
-		panel_3.add(chckbxNewCheckBox_2);
-		
-		JPanel panel_4 = new JPanel();
-		panel_4.setLayout(null);
-		panel_4.setBounds(448, 297, 68, 63);
-		contentPane.add(panel_4);
-		
-		JLabel lblNewLabel_14_4 = new JLabel("<html>Saving<br>Throw</html>");
-		lblNewLabel_14_4.setBounds(16, 24, 32, 28);
-		panel_4.add(lblNewLabel_14_4);
-		
-		JCheckBox chckbxNewCheckBox_3 = new JCheckBox("");
-		chckbxNewCheckBox_3.setBounds(22, 5, 21, 21);
-		panel_4.add(chckbxNewCheckBox_3);
-		
-		JPanel panel_5 = new JPanel();
-		panel_5.setLayout(null);
-		panel_5.setBounds(535, 297, 68, 63);
-		contentPane.add(panel_5);
-		
-		JLabel lblNewLabel_14_5 = new JLabel("<html>Saving<br>Throw</html>");
-		lblNewLabel_14_5.setBounds(16, 24, 32, 28);
-		panel_5.add(lblNewLabel_14_5);
-		
-		JCheckBox chckbxNewCheckBox_4 = new JCheckBox("");
-		chckbxNewCheckBox_4.setBounds(22, 5, 21, 21);
-		panel_5.add(chckbxNewCheckBox_4);
-		
 		textField_1 = new JTextField();
 		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		textField_1.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				digitKeyTypedOnly(e,textField_1);
+				digitKeyTypedOnly2Digit(e,textField_1);
 			}
 		});
 		textField_1.setName("fieldStrength");
@@ -265,12 +187,12 @@ public class MonsterCreatorWindow extends JFrame {
 		textField_2.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				digitKeyTypedOnly(e,textField_2);
+				digitKeyTypedOnly2Digit(e,textField_2);
 			}
 		});
 		textField_2.setName("fieldDexterity");
 		textField_2.setColumns(10);
-		textField_2.setBounds(124, 236, 50, 50);
+		textField_2.setBounds(124, 241, 50, 50);
 		contentPane.add(textField_2);
 		
 		textField_3 = new JTextField();
@@ -279,12 +201,12 @@ public class MonsterCreatorWindow extends JFrame {
 		textField_3.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				digitKeyTypedOnly(e,textField_3);
+				digitKeyTypedOnly2Digit(e,textField_3);
 			}
 		});
 		textField_3.setName("fieldConstitution");
 		textField_3.setColumns(10);
-		textField_3.setBounds(236, 236, 50, 50);
+		textField_3.setBounds(236, 241, 50, 50);
 		contentPane.add(textField_3);
 		
 		textField_4 = new JTextField();
@@ -293,12 +215,12 @@ public class MonsterCreatorWindow extends JFrame {
 		textField_4.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				digitKeyTypedOnly(e,textField_4);
+				digitKeyTypedOnly2Digit(e,textField_4);
 			}
 		});
 		textField_4.setName("fieldInteligence");
 		textField_4.setColumns(10);
-		textField_4.setBounds(359, 236, 50, 50);
+		textField_4.setBounds(359, 241, 50, 50);
 		contentPane.add(textField_4);
 		
 		textField_5 = new JTextField();
@@ -307,12 +229,12 @@ public class MonsterCreatorWindow extends JFrame {
 		textField_5.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				digitKeyTypedOnly(e,textField_5);
+				digitKeyTypedOnly2Digit(e,textField_5);
 			}
 		});
 		textField_5.setName("fieldWisdom");
 		textField_5.setColumns(10);
-		textField_5.setBounds(457, 236, 50, 50);
+		textField_5.setBounds(457, 241, 50, 50);
 		contentPane.add(textField_5);
 		
 		textField_6 = new JTextField();
@@ -321,12 +243,12 @@ public class MonsterCreatorWindow extends JFrame {
 		textField_6.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				digitKeyTypedOnly(e,textField_6);
+				digitKeyTypedOnly2Digit(e,textField_6);
 			}
 		});
 		textField_6.setName("fieldCharisma");
 		textField_6.setColumns(10);
-		textField_6.setBounds(544, 236, 50, 50);
+		textField_6.setBounds(544, 241, 50, 50);
 		contentPane.add(textField_6);
 		
 		JComboBox comboBox = new JComboBox();
@@ -365,7 +287,7 @@ public class MonsterCreatorWindow extends JFrame {
 		textField_7.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				digitKeyTypedOnly(e,textField_7);
+				digitKeyTypedOnly2Digit(e,textField_7);
 			}
 		});
 		textField_7.setName("fieldArmor");
@@ -497,14 +419,76 @@ public class MonsterCreatorWindow extends JFrame {
 		});
 		btnNewButton_1.setBounds(457, 160, 155, 23);
 		contentPane.add(btnNewButton_1);
+		
+		JLabel lblNewLabel_14 = new JLabel("<html>Saving<br>Throw</html>");
+		lblNewLabel_14.setBounds(37, 321, 32, 28);
+		contentPane.add(lblNewLabel_14);
+		
+		JCheckBox chckbxNewCheckBox = new JCheckBox("");
+		chckbxNewCheckBox.setBounds(43, 302, 21, 21);
+		contentPane.add(chckbxNewCheckBox);
+		chckbxNewCheckBox.setName("checkboxStrength");
+		
+		JCheckBox chckbxNewCheckBox_6 = new JCheckBox("");
+		chckbxNewCheckBox_6.setBounds(140, 302, 21, 21);
+		contentPane.add(chckbxNewCheckBox_6);
+		chckbxNewCheckBox_6.setName("checkboxDexterity");
+		
+		JLabel lblNewLabel_14_1 = new JLabel("<html>Saving<br>Throw</html>");
+		lblNewLabel_14_1.setBounds(134, 321, 32, 28);
+		contentPane.add(lblNewLabel_14_1);
+		
+		JCheckBox chckbxNewCheckBox_1 = new JCheckBox("");
+		chckbxNewCheckBox_1.setBounds(251, 302, 21, 21);
+		contentPane.add(chckbxNewCheckBox_1);
+		chckbxNewCheckBox_1.setName("checkboxConstitution");
+		
+		JLabel lblNewLabel_14_2 = new JLabel("<html>Saving<br>Throw</html>");
+		lblNewLabel_14_2.setBounds(245, 321, 32, 28);
+		contentPane.add(lblNewLabel_14_2);
+		
+		JCheckBox chckbxNewCheckBox_2 = new JCheckBox("");
+		chckbxNewCheckBox_2.setBounds(374, 302, 21, 21);
+		contentPane.add(chckbxNewCheckBox_2);
+		chckbxNewCheckBox_2.setName("checkboxInteligence");
+		
+		JLabel lblNewLabel_14_3 = new JLabel("<html>Saving<br>Throw</html>");
+		lblNewLabel_14_3.setBounds(368, 321, 32, 28);
+		contentPane.add(lblNewLabel_14_3);
+		
+		JCheckBox chckbxNewCheckBox_3 = new JCheckBox("");
+		chckbxNewCheckBox_3.setBounds(472, 302, 21, 21);
+		contentPane.add(chckbxNewCheckBox_3);
+		chckbxNewCheckBox_3.setName("checkboxWisdom");
+		
+		JLabel lblNewLabel_14_4 = new JLabel("<html>Saving<br>Throw</html>");
+		lblNewLabel_14_4.setBounds(466, 321, 32, 28);
+		contentPane.add(lblNewLabel_14_4);
+		
+		JCheckBox chckbxNewCheckBox_4 = new JCheckBox("");
+		chckbxNewCheckBox_4.setBounds(559, 302, 21, 21);
+		contentPane.add(chckbxNewCheckBox_4);
+		chckbxNewCheckBox_4.setName("checkboxCharisma");
+		
+		JLabel lblNewLabel_14_5 = new JLabel("<html>Saving<br>Throw</html>");
+		lblNewLabel_14_5.setBounds(553, 321, 32, 28);
+		contentPane.add(lblNewLabel_14_5);
 	}
 	
 	// Para usar em todos os campos que usam apenas numeros em JTextField
-	private void digitKeyTypedOnly(KeyEvent e, JTextField t) {
+	private void digitKeyTypedOnly2Digit(KeyEvent e, JTextField t) {
 		String text = t.getText();
 		char c = e.getKeyChar();
         // Permite apenas números
         if (text.length() >= 2 | !Character.isDigit(c)) {
+            e.consume();  // Impede a digitação de caracteres não numéricos
+        }
+	}
+	private void digitKeyTypedOnly(KeyEvent e, JTextField t) {
+		String text = t.getText();
+		char c = e.getKeyChar();
+        // Permite apenas números
+        if (!Character.isDigit(c)) {
             e.consume();  // Impede a digitação de caracteres não numéricos
         }
 	}

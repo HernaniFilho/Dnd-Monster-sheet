@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
@@ -154,6 +155,8 @@ public class MonsterListWindow extends JFrame {
 		table = new JTable();
 		table.setModel(modelo);
 		scrollPane.setViewportView(table);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
 		
 		JButton btnNewButton_2 = new JButton("Refresh");
 		btnNewButton_2.addActionListener(new ActionListener() {

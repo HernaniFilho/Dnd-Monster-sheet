@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -14,6 +15,7 @@ import javax.swing.JTextField;
 
 import br.monsterssheet.model.entity.Action;
 import br.monsterssheet.model.entity.Monster;
+import br.monsterssheet.model.entity.SavingThrow;
 import br.monsterssheet.model.service.MonsterService;
 import br.monsterssheet.view.MonsterCreatorWindow;
 
@@ -26,11 +28,13 @@ public class MonsterController implements IController{
         	int armorClass, hitPoints, speed, strength, dexterity, constitution, intelligence, wisdom, charisma, proficiencyBonus;
         	List<String> languages = new ArrayList<String>();
         	List<Action> actions = new ArrayList<Action>();
+        	List<SavingThrow> savingThrows = new ArrayList<SavingThrow>();
         	
         	JPanel contentPane = (JPanel)view;
         	MonsterService service = new MonsterService();
         	LanguageController languageController = new LanguageController();
         	ActionController actionController = new ActionController();
+        	SavingThrowController savingThrowController = new SavingThrowController();
         	
         	// Implementar Classe de Error futuramente
         	Component c = IController.findComponentByName("fieldName", contentPane);
@@ -159,7 +163,7 @@ public class MonsterController implements IController{
         		return false;
         	}
         	// Checar outros atributos aqui e depois detá-los corretamente no banco de dados, i.e languages, savingThrows, actions
-        	
+        	// Languages
         	c = IController.findComponentByName("scrollPaneLanguages", contentPane);
         	if(c instanceof JScrollPane) {
         		JScrollPane scrollPaneLanguages = (JScrollPane)c;
@@ -175,7 +179,7 @@ public class MonsterController implements IController{
         		System.out.println("scrollPaneLanguages não existe");
         		return false;
         	}
-        	
+        	// Actions
         	c = IController.findComponentByName("scrollPaneActions", contentPane);
         	if(c instanceof JScrollPane) {
         		JScrollPane scrollPaneActions = (JScrollPane)c;
@@ -191,6 +195,78 @@ public class MonsterController implements IController{
 				}
         	} else {
         		System.out.println("scrollPaneActions não existe");
+        		return false;
+        	}
+        	// SavingThrows
+        	c = IController.findComponentByName("checkboxStrength", contentPane);
+        	if(c instanceof JCheckBox) {
+        		if(((JCheckBox)c).isSelected()) {
+					SavingThrow savingThrow = new SavingThrow();
+					savingThrow.setAbilityScore("Strength");
+					savingThrows.add(savingThrow);
+				}
+        	} else {
+        		System.out.println("checkboxStrength não existe");
+        		return false;
+        	}
+        	
+        	c = IController.findComponentByName("checkboxDexterity", contentPane);
+        	if(c instanceof JCheckBox) {
+        		if(((JCheckBox)c).isSelected()) {
+        			SavingThrow savingThrow = new SavingThrow();
+        			savingThrow.setAbilityScore("Dexterity");
+        			savingThrows.add(savingThrow);
+        		}
+        	} else {
+        		System.out.println("checkboxDexterity não existe");
+        		return false;
+        	}
+        	
+        	c = IController.findComponentByName("checkboxConstitution", contentPane);
+        	if(c instanceof JCheckBox) {
+        		if(((JCheckBox)c).isSelected()) {
+					SavingThrow savingThrow = new SavingThrow();
+					savingThrow.setAbilityScore("Constitution");
+					savingThrows.add(savingThrow);
+				}
+        	} else {
+        		System.out.println("checkboxConstitution não existe");
+        		return false;
+        	}
+        	
+        	c = IController.findComponentByName("checkboxInteligence", contentPane);
+        	if(c instanceof JCheckBox) {
+        		if(((JCheckBox)c).isSelected()) {
+        			SavingThrow savingThrow = new SavingThrow();
+        			savingThrow.setAbilityScore("Inteligence");
+        			savingThrows.add(savingThrow);
+        		}
+        	} else {
+        		System.out.println("checkboxInteligence não existe");
+        		return false;
+        	}
+        	
+        	c = IController.findComponentByName("checkboxWisdom", contentPane);
+        	if(c instanceof JCheckBox) {
+        		if(((JCheckBox)c).isSelected()) {
+					SavingThrow savingThrow = new SavingThrow();
+					savingThrow.setAbilityScore("Wisdom");
+					savingThrows.add(savingThrow);
+				}
+        	} else {
+        		System.out.println("checkboxWisdom não existe");
+        		return false;
+        	}
+        	
+        	c = IController.findComponentByName("checkboxCharisma", contentPane);
+        	if(c instanceof JCheckBox) {
+        		if(((JCheckBox)c).isSelected()) {
+					SavingThrow savingThrow = new SavingThrow();
+					savingThrow.setAbilityScore("Charisma");
+					savingThrows.add(savingThrow);
+				}
+        	} else {
+        		System.out.println("checkboxCharisma não existe");
         		return false;
         	}
         	
@@ -214,10 +290,17 @@ public class MonsterController implements IController{
         	// Salva no banco de dados
         	int idMonster = service.save(m);
         	// Salva languages
-        	languageController.save(idMonster, languages);
+        	if(languages.size() > 0)
+				languageController.save(idMonster, languages);
+        	//languageController.save(idMonster, languages);
         	// Salva actions
-        	actionController.save(idMonster, actions);
-        	
+        	if(actions.size() > 0)
+        		actionController.save(idMonster, actions);
+        	//actionController.save(idMonster, actions);
+        	// Salva savingThrows
+        	if(savingThrows.size() > 0)
+				savingThrowController.save(idMonster, savingThrows);
+        	//savingThrowController.save(idMonster, savingThrows);
         	return true;
         }
         return false;

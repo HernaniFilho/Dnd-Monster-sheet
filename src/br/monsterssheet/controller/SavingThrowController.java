@@ -13,7 +13,16 @@ public class SavingThrowController implements IController{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'execute'");
     }
-
+    
+    public boolean save(int idMonster, List<SavingThrow> savingThrows) {
+		SavingThrowService service = new SavingThrowService();
+		for (SavingThrow savingThrow : savingThrows) {
+			savingThrow.setIdMonster(idMonster);
+			service.save(savingThrow);
+		}
+		return true;
+	}
+    
     public boolean remove(int idMonster) {
 		SavingThrowService service = new SavingThrowService();
 		service.deleteByIdMonster(idMonster);
